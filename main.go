@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"math/rand/v2"
 
 	"github.com/google/uuid"
@@ -19,9 +18,12 @@ func newPeer(name string) *peer {
 	id := uuid.New();
 	randomSpeed := rand.IntN(50)
 	randomRadius := rand.IntN(10)
-	maxShareSpeedPerSec := math.Max(10, float64(randomSpeed))
+	if randomSpeed < 10 {
+		randomSpeed = 10
+	}
+	maxShareSpeedPerSec := float32(randomSpeed)
 	connectionRadius := randomRadius
-	p := peer{id: id.String(), name: name, connectionRadius: int(connectionRadius), maxShareSpeedPerSec: float32(maxShareSpeedPerSec) }
+	p := peer{id: id.String(), name: name, connectionRadius: connectionRadius, maxShareSpeedPerSec: maxShareSpeedPerSec }
 	return &p
 }
 
