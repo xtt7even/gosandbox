@@ -7,7 +7,7 @@ This project is for:
 - Learning Go
 - Researching DTN principles and Store-Carry-Forward Paradigm
 - Simulating my ideas
-- Twisting my brain a little and escaping web-development stagnation
+- Twisting my brain a little and escaping skills stagnation
 
 Not production code. Just experiments.
 
