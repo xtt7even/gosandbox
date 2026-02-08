@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"math/rand/v2"
 	simmap "sandbox/sandbox/map"
 	simplego "sandbox/sandbox/mobility"
+	"sandbox/sandbox/painter"
 	"sandbox/sandbox/peer"
 	"time"
 )
 
 func main() {
-	simmap := simmap.NewMap(250)
+	simmap := simmap.NewMap(50)
 	names := [5]string{"Alice", "John", "Matthew", "Gregory", "Maria"}
 	var peers []peer.Peer
 	for i := 0; i < len(names); i++ {
@@ -34,16 +34,20 @@ func tick(peers []peer.Peer, m *simmap.Map) {
 			simplego.PickRandomWaypointForPeer(peer, m)
 		}
 		simplego.SimpleMove(peer)
+		painter.Draw(m, peers)
 
-		//? temp
-		if i == 0 {
-			fmt.Println("========================================")
-			fmt.Println("Tick:", time.Now().Format("2006-01-02 15:04:05"))
-			fmt.Printf("%-3s %-12s %-20s %-20s %s\n", "ID", "NAME", "POSITION", "WAYPOINT", "DETAILS")
-		}
-		p := peers[i]
-		pos := fmt.Sprintf("pos=%v,%v", p.X, p.Y)
-		wp := fmt.Sprintf("wp=%v,%v", p.WaypointX, p.WaypointY)
-		fmt.Printf("%-3d %-12s %-20s %-20s %v\n", i, p.Name, pos, wp, p)
+		time.Sleep(50 * time.Millisecond)
 	}
 }
+
+// func debugOutput (p peer.Peer) {
+// 	if i == 0 {
+// 		fmt.Println("========================================")
+// 		fmt.Println("Tick:", time.Now().Format("2006-01-02 15:04:05"))
+// 		fmt.Printf("%-3s %-12s %-20s %-20s\n", "ID", "NAME", "POSITION", "WAYPOINT")
+// 	}
+// 	p := peers[i]
+// 	pos := fmt.Sprintf("pos=%v,%v", p.X, p.Y)
+// 	wp := fmt.Sprintf("wp=%v,%v", p.WaypointX, p.WaypointY)
+// 	fmt.Printf("%-3d %-12s %-20s %-20s\n", i, p.Name, pos, wp)
+// }
