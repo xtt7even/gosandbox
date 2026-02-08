@@ -17,12 +17,16 @@ type Peer struct {
 	ConnectionRadius int //simulating connection radius
 	Name string
 	MaxShareSpeedPerSec int	//simulating max share speed in kb/s
+	ConnectedTo []string
 }
 
 func NewPeer(name string) *Peer {
 	id := uuid.New();
 	randomSpeed := rand.IntN(50)
-	randomRadius := rand.IntN(10)
+	randomRadius := rand.IntN(5)
+	if randomRadius < 1 {
+		randomRadius = 1
+	}
 	if randomSpeed < 10 {
 		randomSpeed = 10
 	}
