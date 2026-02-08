@@ -86,10 +86,3 @@ func arePeersOverlapping(root, neighbour peer.Peer) bool {
              root.Y + root.ConnectionRadius < neighbour.Y - neighbour.ConnectionRadius ||
              root.Y - root.ConnectionRadius > neighbour.Y + neighbour.ConnectionRadius)
 }
-
-func getIfCoordInPeerArea(x int, y int, peer peer.Peer) bool {
-	if x < (peer.X - peer.ConnectionRadius) || x > (peer.X + peer.ConnectionRadius) || y < (peer.Y - peer.ConnectionRadius) || y > (peer.Y + peer.ConnectionRadius) {
-		return false
-	}
-	return true
-}
